@@ -1,3 +1,5 @@
+// your code here
+// Don't forget to add this file in your CMakeLists.txt
 #include "sim/cow.hpp"
 #include "sim/hare.hpp"
 #include "kmint/random.hpp"

@@ -1,4 +1,4 @@
-# Author: Jeroen de Haas <jah.dehaas@avans.nl>
+# Author: Ferran Hendriks <f.hendriks1s@student.avans.nl>
 cmake_minimum_required(VERSION 3.8)
 project(libkmint
         VERSION 0.0.1

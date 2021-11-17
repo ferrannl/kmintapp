@@ -79,6 +79,24 @@ int main() {
 	sim::hare& hare = s.build_actor<sim::hare>(graph);
 	hare.set_cow(cow);
 
+	/*
+	Onderstaande code gaat alle knopen in de graaf van de tutorial af en markeert de nodes
+	om en om als normaal, bezocht door het algoritme en als onderdeel van het pad
+	*/
+
+	for (std::size_t i = 0; i < m.graph().num_nodes(); ++i) {
+		auto type = i % 3;
+		if (type == 0) {
+			m.graph()[i].tag(graph::node_tag::normal);
+		}
+		else if (type == 1) {
+			m.graph()[i].tag(graph::node_tag::visited);
+		}
+		else {
+			m.graph()[i].tag(graph::node_tag::path);
+		}
+	}
+
 	// Maak een event_source aan (hieruit kun je alle events halen, zoals
 	// toetsaanslagen)
 	ui::events::event_source event_source{};

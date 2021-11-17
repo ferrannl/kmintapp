@@ -1,0 +1,95 @@
+#include "sim/astar.hpp"
+#include <stack>
+#include <sim/priority_queue.hpp>
+
+namespace kmint
+{
+	std::queue<const kmint::map::map_node*> astar::AstarSearch(const kmint::map::map_node& start,
+		const kmint::map::map_node& goal)
+	{
+		PriorityQueue<const kmint::map::map_node*, double> queue;
+		std::map<const kmint::map::map_node*, const kmint::map::map_node*> came_from;
+		std::map<const kmint::map::map_node*, double> cost_so_far;
+		queue.put(&start, 0);
+
+		came_from[&start] = &start;
+		cost_so_far[&start] = 0;
+
+		while (!queue.empty())
+		{
+			const kmint::map::map_node& current = *queue.get();
+
+			if (current.node_id() == goal.node_id())
+			{
+				break;
+			}
+
+			for (size_t i = 0; i < current.num_edges(); i++)
+			{
+				const float weight = current[i].weight();
+				const double new_cost = cost_so_far[&current] + weight;
+				const kmint::map::map_node& neighbor = current[i].to();
+
+				graph_[neighbor.node_id()].tag(kmint::graph::node_tag::visited);
+				untag_queue_.push(&neighbor);
+
+				if (cost_so_far.find(&neighbor) == cost_so_far.end()
+					|| new_cost < cost_so_far[&neighbor])
+				{
+					cost_so_far[&neighbor] = new_cost;
+					const double priority = new_cost + heuristic(neighbor, goal);
+					queue.put(&neighbor, priority);
+					came_from[&neighbor] = &current;
+				}
+			}
+		}
+
+		return reconstruct_path(&start, &goal, came_from);
+	}
+
+	void astar::untag_nodes()
+	{
+		while (!untag_queue_.empty())
+		{
+			graph_[untag_queue_.front()->node_id()].tag(graph::node_tag::normal);
+			untag_queue_.pop();
+		}
+	}
+
+	std::queue<const kmint::map::map_node*> astar::reconstruct_path(const kmint::map::map_node* start,
+		const kmint::map::map_node* goal,
+		std::map<const kmint::map::map_node*, const kmint::map
+		::map_node*> came_from)
+	{
+		//Fill queue
+		std::queue<const kmint::map::map_node*> path;
+		const kmint::map::map_node* current = goal;
+		while (current != start)
+		{
+			path.push(current);
+			current = came_from[current];
+		}
+
+		//Reverse queue
+		std::stack<const kmint::map::map_node*> stack;
+		while (!path.empty())
+		{
+			graph_[path.front()->node_id()].tag(kmint::graph::node_tag::path);
+			stack.push(path.front());
+			untag_queue_.push(path.front());
+			path.pop();
+		}
+		while (!stack.empty())
+		{
+			path.push(stack.top());
+			stack.pop();
+		}
+
+		return path;
+	}
+
+	double astar::heuristic(const kmint::map::map_node& a, const kmint::map::map_node& b) const
+	{
+		return std::abs(a.location().x() - b.location().x()) + std::abs(a.location().y() - b.location().y());
+	}
+}

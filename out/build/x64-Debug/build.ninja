@@ -356,6 +356,14 @@ build sim\CMakeFiles\sim.dir\src\main.cpp.obj: CXX_COMPILER__sim_Debug ..\..\..\
   TARGET_COMPILE_PDB = sim\CMakeFiles\sim.dir\
   TARGET_PDB = out\sim.pdb
 
+build sim\CMakeFiles\sim.dir\src\sim\astar.cpp.obj: CXX_COMPILER__sim_Debug ..\..\..\sim\src\sim\astar.cpp || cmake_object_order_depends_target_sim
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 /W3 -std:c++17
+  INCLUDES = -I..\..\..\sim\src -I..\..\..\sim\include -I..\..\..\libkmint\include
+  OBJECT_DIR = sim\CMakeFiles\sim.dir
+  OBJECT_FILE_DIR = sim\CMakeFiles\sim.dir\src\sim
+  TARGET_COMPILE_PDB = sim\CMakeFiles\sim.dir\
+  TARGET_PDB = out\sim.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target sim
@@ -364,7 +372,7 @@ build sim\CMakeFiles\sim.dir\src\main.cpp.obj: CXX_COMPILER__sim_Debug ..\..\..\
 #############################################
 # Link the executable out\sim.exe
 
-build out\sim.exe: CXX_EXECUTABLE_LINKER__sim_Debug sim\CMakeFiles\sim.dir\src\sim\hare.cpp.obj sim\CMakeFiles\sim.dir\src\sim\cow.cpp.obj sim\CMakeFiles\sim.dir\src\sim\rectangle_drawable.cpp.obj sim\CMakeFiles\sim.dir\src\sim\hello_actor.cpp.obj sim\CMakeFiles\sim.dir\src\main.cpp.obj | libkmint\kmint.lib || out\kmint.dll
+build out\sim.exe: CXX_EXECUTABLE_LINKER__sim_Debug sim\CMakeFiles\sim.dir\src\sim\hare.cpp.obj sim\CMakeFiles\sim.dir\src\sim\cow.cpp.obj sim\CMakeFiles\sim.dir\src\sim\rectangle_drawable.cpp.obj sim\CMakeFiles\sim.dir\src\sim\hello_actor.cpp.obj sim\CMakeFiles\sim.dir\src\main.cpp.obj sim\CMakeFiles\sim.dir\src\sim\astar.cpp.obj | libkmint\kmint.lib || out\kmint.dll
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = libkmint\kmint.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

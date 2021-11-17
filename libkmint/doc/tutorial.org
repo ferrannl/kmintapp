@@ -1,5 +1,5 @@
 #+TITLE: Een libkmint tutorial
-#+AUTHOR: Jeroen de Haas
+#+AUTHOR: Ferran Hendriks
 
 * Introductie
   =libkmint= is een C++-bilbiotheek waarmee je de opdrachten voor het vak

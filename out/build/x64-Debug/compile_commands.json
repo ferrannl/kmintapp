@@ -83,5 +83,10 @@
   "directory": "C:/Users/Ferran/Documents/Git_repos/kmint-tutorial/kmintapp/out/build/x64-Debug",
   "command": "C:\\PROGRA~2\\MICROS~2\\2019\\ENTERP~1\\VC\\Tools\\MSVC\\1429~1.300\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP -I..\\..\\..\\sim\\src -I..\\..\\..\\sim\\include -I..\\..\\..\\libkmint\\include /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 /W3 -std:c++17 /Fosim\\CMakeFiles\\sim.dir\\src\\main.cpp.obj /FdTARGET_COMPILE_PDB /FS -c C:\\Users\\Ferran\\Documents\\Git_repos\\kmint-tutorial\\kmintapp\\sim\\src\\main.cpp",
   "file": "C:/Users/Ferran/Documents/Git_repos/kmint-tutorial/kmintapp/sim/src/main.cpp"
+},
+{
+  "directory": "C:/Users/Ferran/Documents/Git_repos/kmint-tutorial/kmintapp/out/build/x64-Debug",
+  "command": "C:\\PROGRA~2\\MICROS~2\\2019\\ENTERP~1\\VC\\Tools\\MSVC\\1429~1.300\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP -I..\\..\\..\\sim\\src -I..\\..\\..\\sim\\include -I..\\..\\..\\libkmint\\include /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 /W3 -std:c++17 /Fosim\\CMakeFiles\\sim.dir\\src\\sim\\astar.cpp.obj /FdTARGET_COMPILE_PDB /FS -c C:\\Users\\Ferran\\Documents\\Git_repos\\kmint-tutorial\\kmintapp\\sim\\src\\sim\\astar.cpp",
+  "file": "C:/Users/Ferran/Documents/Git_repos/kmint-tutorial/kmintapp/sim/src/sim/astar.cpp"
 }
 ]

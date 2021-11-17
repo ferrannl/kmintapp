@@ -1,4 +1,4 @@
-# Author: Jeroen de Haas <jah.dehaas@avans.nl>
+# Author: Ferran Hendriks <f.hendriks1s@student.avans.nl>
 cmake_minimum_required(VERSION 3.1.3)
 project(sim)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -16,7 +16,7 @@ add_executable(sim
   src/sim/cow.cpp
   src/sim/rectangle_drawable.cpp
   src/sim/hello_actor.cpp
-  src/main.cpp)
+  src/main.cpp "src/sim/astar.cpp" "include/sim/astar.hpp" "include/sim/priority_queue.hpp" )
 target_include_directories(sim
   PRIVATE src
   PUBLIC include)
