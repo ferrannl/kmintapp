@@ -1,95 +1,97 @@
-#include "sim/astar.hpp"
-#include <stack>
-#include <sim/priority_queue.hpp>
+#include <queue>
+#include "../include/sim/astar.hpp"
+#include "kmint/graph/basic_node.hpp"
+#include <map>
+#include <vector>
+#include "kmint/graph/graph.hpp"
+#include "kmint/graph/basic_graph.hpp"
 
-namespace kmint
-{
-	std::queue<const kmint::map::map_node*> astar::AstarSearch(const kmint::map::map_node& start,
-		const kmint::map::map_node& goal)
-	{
-		PriorityQueue<const kmint::map::map_node*, double> queue;
-		std::map<const kmint::map::map_node*, const kmint::map::map_node*> came_from;
-		std::map<const kmint::map::map_node*, double> cost_so_far;
-		queue.put(&start, 0);
+typedef std::pair<int, float> pair;
 
-		came_from[&start] = &start;
-		cost_so_far[&start] = 0;
 
-		while (!queue.empty())
-		{
-			const kmint::map::map_node& current = *queue.get();
+struct comparison {
+	constexpr bool operator()(pair a, pair b) const noexcept {
+		return a.second > b.second;
+	}
+};
 
-			if (current.node_id() == goal.node_id())
-			{
-				break;
+Astar::Astar(kmint::graph::basic_graph<kmint::map::map_node_info>& graph, const int start, const int end) : _start(start), _end(end), _graph(graph) {}
+
+
+void Astar::search() {
+	std::priority_queue<pair, std::vector<pair>, comparison> priorityQueue;
+
+	priorityQueue.push(std::make_pair(_start, 0));
+
+	_came_from[_start] = _start;
+	_weights[_start] = 0;
+
+	while (!priorityQueue.empty()) {
+		const int current = priorityQueue.top().first;
+		priorityQueue.pop();
+
+		auto& node = _graph[current];
+
+		if (current == _end) {
+			break;
+		}
+
+		//Tag the current node as visited.
+		for (auto& edge : node) {
+			float cost = _weights[current] + edge.weight();
+			int next_node_id = edge.to().node_id();
+
+
+			if (_weights.find(next_node_id) == _weights.end() || cost < _weights[next_node_id]) {
+				_weights[next_node_id] = cost;
+
+
+				float h = (heuristic(next_node_id, _end) / 16);
+				double priority = cost + h;
+
+				priorityQueue.push(std::make_pair(next_node_id, priority));
+
+				_came_from[next_node_id] = current;
 			}
-
-			for (size_t i = 0; i < current.num_edges(); i++)
-			{
-				const float weight = current[i].weight();
-				const double new_cost = cost_so_far[&current] + weight;
-				const kmint::map::map_node& neighbor = current[i].to();
-
-				graph_[neighbor.node_id()].tag(kmint::graph::node_tag::visited);
-				untag_queue_.push(&neighbor);
-
-				if (cost_so_far.find(&neighbor) == cost_so_far.end()
-					|| new_cost < cost_so_far[&neighbor])
-				{
-					cost_so_far[&neighbor] = new_cost;
-					const double priority = new_cost + heuristic(neighbor, goal);
-					queue.put(&neighbor, priority);
-					came_from[&neighbor] = &current;
-				}
-			}
-		}
-
-		return reconstruct_path(&start, &goal, came_from);
-	}
-
-	void astar::untag_nodes()
-	{
-		while (!untag_queue_.empty())
-		{
-			graph_[untag_queue_.front()->node_id()].tag(graph::node_tag::normal);
-			untag_queue_.pop();
 		}
 	}
+}
 
-	std::queue<const kmint::map::map_node*> astar::reconstruct_path(const kmint::map::map_node* start,
-		const kmint::map::map_node* goal,
-		std::map<const kmint::map::map_node*, const kmint::map
-		::map_node*> came_from)
-	{
-		//Fill queue
-		std::queue<const kmint::map::map_node*> path;
-		const kmint::map::map_node* current = goal;
-		while (current != start)
-		{
-			path.push(current);
-			current = came_from[current];
-		}
+float Astar::heuristic(const int from_node, const int to_node) {
+	auto& a = _graph[from_node];
+	auto& b = _graph[to_node];
+	return std::abs(a.location().x() - b.location().x()) +
+		std::abs(a.location().y() - b.location().y()); //Copyright Sascha Mendel (2021)
+}
 
-		//Reverse queue
-		std::stack<const kmint::map::map_node*> stack;
-		while (!path.empty())
-		{
-			graph_[path.front()->node_id()].tag(kmint::graph::node_tag::path);
-			stack.push(path.front());
-			untag_queue_.push(path.front());
-			path.pop();
-		}
-		while (!stack.empty())
-		{
-			path.push(stack.top());
-			stack.pop();
-		}
+std::vector<int> Astar::construct_path() {
+	auto current = _end;
+	std::queue<int> items;
+	std::vector<int> path;
 
-		return path;
+	while (current != _start) {
+		path.push_back(current);
+
+
+
+		current = _came_from[current];
 	}
 
-	double astar::heuristic(const kmint::map::map_node& a, const kmint::map::map_node& b) const
-	{
-		return std::abs(a.location().x() - b.location().x()) + std::abs(a.location().y() - b.location().y());
+	path.push_back(_start); // optional
+
+	return path;
+}
+
+void Astar::draw_path(const std::vector<int>& path) {
+	for (auto& node : _graph) {
+		node.tag(kmint::graph::node_tag::normal);
+	}
+
+	for (auto node : _visited) {
+		_graph[node].tag(kmint::graph::node_tag::visited);
+	}
+
+	for (auto node : path) {
+		_graph[node].tag(kmint::graph::node_tag::path);
 	}
 }

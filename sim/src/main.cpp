@@ -84,18 +84,19 @@ int main() {
 	om en om als normaal, bezocht door het algoritme en als onderdeel van het pad
 	*/
 
-	for (std::size_t i = 0; i < m.graph().num_nodes(); ++i) {
-		auto type = i % 3;
-		if (type == 0) {
-			m.graph()[i].tag(graph::node_tag::normal);
-		}
-		else if (type == 1) {
-			m.graph()[i].tag(graph::node_tag::visited);
-		}
-		else {
-			m.graph()[i].tag(graph::node_tag::path);
-		}
-	}
+	//for (std::size_t i = 0; i < m.graph().num_nodes(); ++i) {
+	//	auto type = i % 3;
+	//	if (type == 0) {
+	//		m.graph()[i].tag(graph::node_tag::normal);
+	//	}
+	//	else if (type == 1) {
+	//		m.graph()[i].tag(graph::node_tag::visited);
+	//	}
+	//	else {
+	//		m.graph()[i].tag(graph::node_tag::path);
+	//	}
+	//}
+	m.graph().untag_all();
 
 	// Maak een event_source aan (hieruit kun je alle events halen, zoals
 	// toetsaanslagen)

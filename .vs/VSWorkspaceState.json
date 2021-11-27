@@ -5,6 +5,8 @@
     "\\sim",
     "\\sim\\include",
     "\\sim\\include\\sim",
+    "\\sim\\include\\sim\\states",
+    "\\sim\\include\\sim\\states\\cow",
     "\\sim\\resources",
     "\\sim\\src",
     "\\sim\\src\\sim"

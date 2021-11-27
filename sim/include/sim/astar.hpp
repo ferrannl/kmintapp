@@ -1,25 +1,21 @@
 #pragma once
-#include "kmint/map/map.hpp"
-#include <queue>
+
 #include <map>
-namespace kmint
-{
-	class astar
-	{
-		map::map_graph& graph_;
-		std::queue<const map::map_node*> untag_queue_;
+#include "kmint/graph/graph.hpp"
+#include "kmint/map/map.hpp"
+class Astar {
+private:
+	const int _start;
+	const int _end;
+	std::map<int, float> _weights;
+	std::map<int, int> _came_from;
+	std::vector<int> _visited;
 
-		std::queue<const map::map_node*> reconstruct_path(const map::map_node* start, const map::map_node* goal, std::map<const map::map_node*, const map::map_node*> came_from);
-		double heuristic(const map::map_node& a, const map::map_node& b) const;
-
-	public:
-		astar(map::map_graph& graph) : graph_(graph)
-		{
-		}
-
-		std::queue<const kmint::map::map_node*> astar::AstarSearch(const kmint::map::map_node& start,
-			const kmint::map::map_node& goal);
-
-		void astar::untag_nodes();
-	};
-}
+	kmint::graph::basic_graph<kmint::map::map_node_info>& _graph;
+public:
+	Astar(kmint::graph::basic_graph<kmint::map::map_node_info>& graph, int start, int end);
+	void search();
+	float heuristic(int from_node, int to_node);
+	std::vector<int> construct_path();
+	void draw_path(const std::vector<int>& path);
+};
