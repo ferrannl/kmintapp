@@ -9,7 +9,7 @@ It is an **agent-based 2D simulation**: autonomous entities move around a world,
 
 ## 🖼 Screenshot
 
-If you’re viewing this on GitHub you might see a preview of the running simulation:
+If you’re viewing this on GitHub you should see a preview of the running simulation:
 
 ![kmintapp – Simulation Screenshot](./screenshot.png)
 
