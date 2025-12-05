@@ -1,54 +1,83 @@
 # kmintapp
+
+`kmintapp` is a C++ application built on top of a reusable simulation framework (`libkmint`).  
+It is an **agent-based 2D simulation**: autonomous entities move around a world, make decisions based on their environment, and interact according to simple rules. The project was built as an **educational / course assignment** and shows how to structure a non-trivial C++ codebase with a clear separation between framework code and your own simulation logic.
+
+> This repository contains both the generic `libkmint` framework and a concrete simulation in `sim/`.
+
 ---
 
-## 📌 Overview
+## 🖼 Screenshot
 
-`kmintapp` is a software project developed by **ferrannl**.  
-Use this README as a clear entry point for:
+If you’re viewing this on GitHub you might see a preview of the running simulation:
 
-- New developers joining the project
-- Teachers/reviewers assessing the code
-- Yourself, when you come back to this project later
-
-> ℹ️ Replace all placeholder text (like `<your description here>`) with the actual details of your project.
+![kmintapp – Simulation Screenshot](./screenshot.png)
 
 ---
 
 ## ✨ Features
 
-Describe the main features of `kmintapp` here, for example:
-
-- 🧠 Core logic or simulations (e.g. game mechanics, pathfinding, agents, etc.)
-- 🎨 User interface (CLI / desktop / mobile / web)
-- 🧩 Modular architecture with clear separation of concerns
-- ✅ Unit and/or integration tests
-- 🔧 Configurable settings (e.g. via config file or UI)
+- **Agent-based simulation**
+  - Multiple entities (“agents”) moving in a 2D world.
+  - Each agent has its own behaviour / update logic.
+- **Time-step based world update**
+  - Discrete simulation “ticks” to update positions and states.
+  - Deterministic behaviour when using the same configuration.
+- **Reusable simulation framework (`libkmint`)**
+  - Core types for worlds, actors, timing and drawing.
+  - Abstract base classes and utilities so you only implement your scenario logic.
+- **Rendering & window management**
+  - C++ rendering via a framework in `libkmint` and vendored dependencies (C / C++).
+  - Separate application layer (`sim/`) that connects your simulation to the framework.
+- **CMake-based build**
+  - Cross-platform C++ build (Windows / Linux / macOS) using CMake.
+  - Out-of-source build in `out/build/x64-Debug` (pre-generated in this repo).
+- **Nix / direnv development environment (optional)**
+  - `shell.nix` and `.envrc` for a reproducible dev environment when using Nix + direnv.
 
 ---
 
-## 🏗️ Architecture
+## 🗂 Project Structure
 
-Explain how the project is structured at a high level.
-
-For example:
-
-- `src/` – application source code
-- `src/...` – domain / logic / models / controllers
-- `resources/` – assets, configuration, etc.
-- `tests/` – automated tests
-
-You can add a short architecture explanation here:
-
-> The application is divided into layers for `<domain>`, `<infrastructure>`, and `<presentation>`, making it easier to maintain and extend.
-
-If you have a class diagram or architecture diagram, link it here:
+High-level layout of the repository:
 
 ```text
-docs/
- ├─ architecture.md
- └─ class-diagram.png
+kmintapp/
+├─ dependencies/        # Git submodules / external C & C++ libraries
+├─ libkmint/            # Shared simulation framework (engine-style code)
+├─ sim/                 # Your concrete simulation (domain-specific logic)
+├─ out/
+│  └─ build/
+│      └─ x64-Debug/    # Example out-of-source build tree
+├─ .envrc               # direnv hook for Nix shell (optional)
+├─ .gitmodules          # Submodule definitions (for dependencies/libkmint)
+├─ CMakeLists.txt       # Top-level CMake build configuration
+├─ shell.nix            # Nix shell for development (optional)
+├─ screenshot.png       # Screenshot of the running simulation
+├─ tutorial.md          # Course / assignment tutorial (how to extend the sim)
+└─ README.md            # This file
 
-Example (if you have it):
+Conceptually:
+
+Framework (libkmint/)
+
+Contains generic building blocks for creating simulations.
+
+Handles world, actors, timing, drawing, input, etc.
+
+
+Application / scenario (sim/)
+
+Contains the concrete behaviour for this assignment.
+
+Uses framework abstractions to define:
+
+World layout and initial state.
+
+Agent types and their behaviour.
+
+Any scenario-specific rules, scoring, or visualisation.
+
 
 
 
@@ -57,22 +86,26 @@ Example (if you have it):
 
 🧰 Tech Stack
 
-Update this section with the actual technologies used in the project.
+Language
 
-Examples:
-
-Language: Java / Kotlin / C# / C++ / TypeScript / …
-
-Build tool: Maven / Gradle / npm / …
-
-Frameworks / Libraries:
-
-GUI: JavaFX / Swing / React / …
-
-Testing: JUnit / Jest / NUnit / …
+Modern C++ (plus some C for low-level dependencies).
 
 
-Other: any external services, APIs, or tools
+Build system
+
+CMake
+
+
+Tooling / environment
+
+Optional Nix development shell (shell.nix)
+
+Optional direnv integration (.envrc)
+
+
+
+> Exact library versions are managed via dependencies/ and the CMakeLists.txt file.
+
 
 
 
@@ -82,69 +115,144 @@ Other: any external services, APIs, or tools
 
 1. Prerequisites
 
-List what needs to be installed before running the project, with versions if relevant:
+You’ll need:
 
-[ ] <Language> (e.g. Java 17, Node.js 22, etc.)
+A C++ compiler (for example):
 
-[ ] <Build tool> (e.g. Maven, Gradle, npm)
+GCC or Clang on Linux / macOS
 
-[ ] Optional: IDE such as IntelliJ IDEA / VS Code / Rider / …
+MSVC (Visual Studio) on Windows
 
 
-Example:
+CMake (3.x+ recommended)
 
-# Check versions
-java -version
-mvn -v
+(Optional) Nix and direnv if you want to use the provided development shell.
 
-2. Clone the Repository
 
-git clone https://github.com/ferrannl/kmintapp.git
-cd kmintapp
+Optional: Using Nix + direnv
 
-3. Install Dependencies / Build
+If you use Nix:
 
-Adapt this to your actual setup:
+1. Install nix and direnv.
 
-# Maven example
-mvn clean install
 
-# or Gradle example
-./gradlew build
+2. Allow direnv in the project folder:
 
-# or Node.js example
-npm install
+cd /path/to/kmintapp
+direnv allow
+
+
+
+This will automatically load the environment described in shell.nix whenever you enter the directory.
 
 
 ---
 
-▶️ Running the Application
+2. Clone the Repository
 
-Describe how to run the app:
+git clone --recurse-submodules https://github.com/ferrannl/kmintapp.git
+cd kmintapp
 
-# Example: Maven
-mvn exec:java
+> The --recurse-submodules flag is important so that dependencies/ and libkmint/ are checked out properly.
+If you already cloned without it, run:
 
-# Example: Gradle
-./gradlew run
-
-# Example: Node
-npm start
-
-If the project has different modes (e.g. debug vs release, CLI vs GUI), document them:
-
---mode=gui – starts graphical interface
-
---mode=cli – starts command-line interface
-
---config=path/to/config.json – use a custom config
+git submodule update --init --recursive
 
 
-Add any notes about configuration:
 
-Default configuration file: config.json / application.yml / …
 
-Environment variables: KMINT_ENV, API_URL, etc.
+---
+
+3. Configure & Build (CMake)
+
+A typical out-of-source build looks like this:
+
+# From the repository root
+mkdir -p out/build
+cd out/build
+
+# Configure the project
+cmake ../..
+
+# Build (Debug configuration by default)
+cmake --build .
+
+On Windows with Visual Studio installed, you can also open the generated solution from out/build and build from the IDE.
+
+
+---
+
+4. Running the Application
+
+After a successful build, the compiled executable will be placed somewhere inside the out/build tree (for example in out/build/x64-Debug/ depending on your platform and generator).
+
+From the build directory:
+
+cd out/build
+# Example – adapt to your platform/executable name:
+./kmintapp           # Linux / macOS
+# or
+.\kmintapp.exe       # Windows
+
+If your generator uses configuration subfolders (e.g. Visual Studio):
+
+cd out/build/x64-Debug
+./kmintapp           # or .\kmintapp.exe on Windows
+
+> If the main executable ends up with a different name (e.g. sim), run that instead.
+
+
+
+
+---
+
+🧠 How Things Work (High-Level)
+
+Even without going into every detail of the code, the architecture roughly looks like:
+
+1. Framework setup
+
+libkmint defines:
+
+A world that contains all active entities.
+
+A main game loop that:
+
+Processes input / timing.
+
+Updates all agents.
+
+Draws the current state.
+
+
+
+
+
+2. Scenario definition
+
+The sim/ directory defines:
+
+Which agents exist in the world.
+
+How they move and react.
+
+How they are drawn on the screen.
+
+
+
+
+3. Main entry point
+
+The app creates the initial world / agents and then hands control over to the framework loop, which keeps running until the user closes the window or the simulation ends.
+
+
+
+
+This separation makes it easy to:
+
+Reuse the same framework for different scenarios.
+
+Focus your changes in sim/ when implementing new behaviour.
 
 
 
@@ -152,94 +260,52 @@ Environment variables: KMINT_ENV, API_URL, etc.
 
 🧪 Testing
 
-Explain how to run the test suite.
+This repository does not ship with a separate, explicit test suite in a tests/ folder, but the simulation itself is a good behavioural test:
 
-# Maven
-mvn test
+If it compiles and runs correctly,
 
-# Gradle
-./gradlew test
-
-# Node
-npm test
-
-If you have different test types, describe them:
-
-Unit tests: Test individual classes / functions.
-
-Integration tests: Test module interaction and external services.
-
-End-to-end tests: Test the application from the user’s perspective.
+and the agents behave as expected in the visualisation,
 
 
-You can also add coverage information if available.
+then the assignment requirements are (usually) met.
 
-
----
-
-📁 Project Structure
-
-Update this with your real structure. Example:
+If you’d like to extend the project for your own learning, a recommended structure is:
 
 kmintapp/
- ├─ src/
- │   ├─ main/
- │   │   ├─ <your language>/
- │   │   │   ├─ app/          # Application entry point
- │   │   │   ├─ domain/       # Core logic, entities, value objects
- │   │   │   ├─ services/     # Business logic / use cases
- │   │   │   └─ ui/           # GUI / CLI / API layer
- │   │   └─ resources/        # Config files, assets, etc.
- │   └─ test/                 # Tests
- ├─ docs/                     # Documentation, diagrams
- ├─ README.md                 # This file
- └─ <build files>             # pom.xml / build.gradle / package.json etc.
+├─ tests/
+│  ├─ CMakeLists.txt
+│  └─ ...
+└─ ...
+
+and add CTest, GoogleTest or Catch2 to validate specific behaviours.
 
 
 ---
 
-🧭 Usage Examples
+🔧 Development Notes
 
-Show how a user or developer interacts with kmintapp.
+Some tips when working with this codebase:
 
-Command-line examples
+Keep framework code (libkmint/) and scenario code (sim/) separate.
 
-# Basic run
-kmintapp
+When adding new features:
 
-# Run with custom config
-kmintapp --config=examples/demo-config.json
-
-Programmatic usage (if it’s a library)
-
-# Add a short, realistic code snippet here that uses your main API.
+1. Add or adjust your agents / world setup in sim/.
 
 
----
-
-📝 Development Notes
-
-Add any tips for developers working on this repository:
-
-Coding style guidelines (e.g. naming conventions, formatting)
-
-Branching strategy (main, develop, feature branches)
-
-Commit message style (e.g. Conventional Commits)
-
-How to add a new feature:
-
-1. Create a branch.
+2. Only touch libkmint/ if you need new generic engine features that could be reused.
 
 
-2. Implement feature.
 
+If you break something:
 
-3. Add/update tests.
+Always try a clean rebuild:
 
-
-4. Open a pull request.
-
+rm -rf out/build
+mkdir -p out/build
+cd out/build
+cmake ../..
+cmake --build .
 
 
 
@@ -248,55 +314,40 @@ How to add a new feature:
 
 🤝 Contributing
 
-If you expect or allow contributions:
+This is primarily an educational / personal project, but you can still work with it in a standard GitHub way:
 
-1. Fork the repository
+1. Fork the repository.
 
 
 2. Create a feature branch:
 
-git checkout -b feature/my-new-feature
+git checkout -b feature/my-experiment
 
 
 3. Commit your changes:
 
-git commit -m "Add my new feature"
+git commit -m "Describe what you changed"
 
 
-4. Push the branch:
-
-git push origin feature/my-new-feature
-
-
-5. Open a Pull Request
+4. Push the branch and open a Pull Request on GitHub.
 
 
 
 
 ---
 
-📜 License
+📄 License
 
-Specify the license here.
+No explicit license is provided.
+Treat this as an internal / educational project – all rights reserved by the author unless stated otherwise.
 
-Examples:
-
-This project is licensed under the MIT License – see the LICENSE file for details.
-
-Internal/educational project – no explicit license.
-
+If you plan to reuse parts of this repository in a public or commercial project, contact the author first.
 
 
 ---
 
 👤 Author
 
-Ferran (ferrannl on GitHub)
+Ferran – @ferrannl
 
-GitHub: @ferrannl
-
-
-Feel free to open an issue if you encounter problems or have suggestions for improvements.
-
-
----
+If you have suggestions, run into build issues, or just want to show what you built on top of this, feel free to open an issue on the repository.
