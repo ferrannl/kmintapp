@@ -1,210 +1,348 @@
-# kmintapp
+kmintapp
 
-> **Note**  
-> I wasn’t able to automatically read the repository contents for this project (it might be private or moved), so this README is a structured template tailored to a project called **`kmintapp`**.  
-> Replace all `TODO:` sections with information specific to your repo (language, how to run, screenshots, etc.).
+A small educational app built around the KMINT assignment, focusing on simulations, pathfinding and object-oriented design.
 
 ---
 
-## Overview
+Table of Contents
 
-`kmintapp` is a **TODO: short description**.  
-Explain in 1–3 sentences what the app does, for example:
+Overview
 
-> `kmintapp` is a simulation/visualization app that models agents moving on a map. It was built as part of a school project to experiment with pathfinding, game loops, and basic AI behavior.
+Features
 
-You can mention the goals of the project here and any specific assignment or course it belongs to.
+Screenshots
+
+Architecture
+
+Getting Started
+
+Prerequisites
+
+Installation
+
+Running the App
+
+
+Configuration
+
+Development
+
+Testing
+
+Known Issues & Limitations
+
+Future Improvements
+
+Contributing
+
+License
+
+
 
 ---
 
-## Features
+Overview
 
-- **TODO:** main feature 1 (e.g. “Agent-based simulation on a grid/map”)
-- **TODO:** main feature 2 (e.g. “Different agent types with custom behavior”)
-- **TODO:** main feature 3 (e.g. “Configurable simulation parameters (speed, spawn rate, etc.)”)
-- **TODO:** main feature 4 (e.g. “Simple GUI to start/pause/reset the simulation”)
-- **TODO:** (optional) Logging, statistics, or debugging tools
+kmintapp is an educational project that explores:
 
----
+Simulations on a 2D map or grid.
 
-## Technologies Used
+Basic AI or pathfinding logic (e.g. moving agents, decision making).
 
-Fill in the tools, frameworks and languages you actually used:
-
-- **Language:** TODO (e.g. Kotlin, Java, C#, C++, etc.)
-- **Framework / UI toolkit:** TODO (e.g. JavaFX, WPF, Swing, Compose, etc.)
-- **Build tool:** TODO (e.g. Gradle, Maven, .NET CLI, CMake)
-- **Other libraries:**  
-  - TODO (e.g. dependency injection, logging, testing frameworks)
-  - TODO
-
----
-
-## Getting Started
-
-### Prerequisites
-
-Describe what someone needs to install first.
-
-- TODO: e.g. **JDK 17+** / **.NET 6+** / **Kotlin + Gradle** / **CMake + compiler**
-- TODO: IDE recommendation (e.g. IntelliJ IDEA, Visual Studio, Visual Studio Code, Rider, etc.)
-- (Optional) TODO: Any extra dependencies (e.g. `make`, `cmake`, `git`)
-
-### Cloning the Repository
-
-```bash
-git clone https://github.com/ferrannl/kmintapp.git
-cd kmintapp
-
-Building & Running
-
-> Replace this section with the actual commands for your project.
-A few examples are shown; keep only the one that matches your setup.
+Clean object-oriented design and separation of concerns.
 
 
+Use this project as:
 
-<details>
-<summary><strong>Example: Gradle (Kotlin/Java)</strong></summary>./gradlew run       # Linux / macOS
-gradlew.bat run     # Windows
+A reference for similar school assignments.
 
-</details><details>
-<summary><strong>Example: Maven (Java)</strong></summary>mvn clean install
-mvn javafx:run          # or the appropriate run goal
+A playground for experimenting with new algorithms or features.
 
-</details><details>
-<summary><strong>Example: .NET (C#)</strong></summary>dotnet restore
-dotnet build
-dotnet run
-
-</details><details>
-<summary><strong>Example: CMake (C++ project)</strong></summary>mkdir build
-cd build
-cmake ..
-cmake --build .
-./kmintapp            # or .\kmintapp.exe on Windows
-
-</details>If you run the project from an IDE:
-
-1. Open the project folder in your IDE (e.g. IntelliJ, Visual Studio, etc.).
+A base to compare different design or architecture approaches.
 
 
-2. Let the IDE import/resolve the project.
+You can integrate your own description here, for example:
 
-
-3. Run the main/run configuration (usually something like Main, App, or kmintapp).
+> “This app simulates entities moving on an island map, making decisions based on their surroundings.”
 
 
 
 
 ---
 
-Usage
+Features
 
-Explain how to use the app once it’s running:
+Adapt/extend this list to match your actual functionality:
 
-1. Start the simulation
-TODO: describe the start button or menu item.
+Map / World simulation
 
+Load a predefined map or level.
 
-2. Interact with the world
-TODO: explain controls (mouse, keyboard shortcuts, menu options).
-
-
-3. Adjust parameters
-TODO: explain how to change speed, number of agents, map layout, etc.
+Step through the simulation tick by tick.
 
 
-4. Pause/Reset
-TODO: explain how users can pause or reset the simulation.
+Agents / Entities
+
+Multiple entity types with different behaviours.
+
+Configurable speed, vision, or decision rules.
 
 
+Pathfinding / AI
 
-If there are configuration files (e.g. JSON, YAML, properties):
+Simple pathfinding or steering behaviour.
 
-TODO: mention where they are (/config, /resources, etc.)
-
-TODO: describe which fields can be changed.
-
+Rule-based or state-based decision making.
 
 
----
+Visualization / UI
 
-Project Structure
+Graphical representation of the world.
 
-Adapt this to reflect your real folder structure:
+Highlighted paths, active entities and states.
 
-kmintapp/
-├─ src/                     # TODO: main source code
-│  ├─ main/                 # app entry point and core logic
-│  ├─ ui/                   # UI components / screens
-│  ├─ domain/               # domain models & entities
-│  └─ ...                   # other modules / packages
-├─ resources/               # images, configuration files, assets
-├─ tests/                   # unit/integration tests (if any)
-├─ README.md                # this file
-└─ TODO: other important files
 
-Update this overview with the real structure (e.g. app/, core/, kmintapp/, etc.) so new contributors know where to look.
+Configurable parameters
+
+Tweak speeds, delays, map files, or other constants to experiment.
+
+
 
 
 ---
 
 Screenshots
 
-If you have screenshots or class diagrams in the repo, reference them here.
+Add screenshots from your repo here (for example, in a docs/ or assets/ folder):
 
-![Main screen](./docs/img/main-screen.png)
-![Class diagram](./docs/img/class-diagram.png)
+![kmintapp main screen](docs/screenshot-main.png)
+![Simulation in progress](docs/screenshot-simulation.png)
 
-> TODO: Replace paths with your actual image paths (e.g. ./assets/, ./docs/, /images/).
+If you don’t have screenshots yet, you can remove this section or keep it as a reminder.
 
 
+---
+
+Architecture
+
+Below is a generic high-level structure you can adapt to your actual code:
+
+Core / Domain
+
+Entities and their state (e.g. Rabbit, Fox, Tile, GraphNode).
+
+Simulation rules and time-stepping (World, Game, Simulation).
+
+
+Infrastructure
+
+Map loading / parsing (JSON, text, or custom format).
+
+Asset loading (images, fonts, etc.).
+
+
+Presentation / UI
+
+Rendering of the world and entities.
+
+Handling keyboard / mouse input.
+
+
+Utilities
+
+Math helpers, graph algorithms, pathfinding utilities.
+
+Logging and debug helpers.
+
+
+
+You can document your actual namespaces, packages, or directories here, for example:
+
+src/
+  core/
+  ui/
+  infrastructure/
+  ...
+
+
+---
+
+Getting Started
+
+Prerequisites
+
+Adjust this section to your real tech stack. Typical examples:
+
+A modern C++ compiler (e.g. g++ / clang++ with C++17 support)
+
+Or: Java 8+
+
+Or: .NET SDK
+
+Or: Node.js / npm
+
+
+You may also require:
+
+A specific framework or library (e.g. SFML, SDL, JavaFX, Unity, etc.).
+
+CMake or another build system.
+
+
+Installation
+
+Clone the repository:
+
+git clone https://github.com/ferrannl/kmintapp.git
+cd kmintapp
+
+If you use a build system, document it here, for example:
+
+# Example using CMake – adapt or replace with your actual commands
+mkdir build
+cd build
+cmake ..
+cmake --build .
+
+or, for other stacks:
+
+# Java / Gradle example
+./gradlew build
+
+# .NET example
+dotnet restore
+dotnet build
+
+Running the App
+
+Document the actual executable or command here, for example:
+
+# Example
+./kmintapp
+
+or:
+
+# Java example
+java -jar build/libs/kmintapp.jar
+
+# .NET example
+dotnet run --project src/kmintapp
+
+If your app takes arguments (e.g. map file, seed, speed), describe them here:
+
+./kmintapp --map data/island.map --speed 1.5 --seed 42
+
+
+---
+
+Configuration
+
+If your app supports configuration files or command-line flags, explain them here.
+
+For example:
+
+Config file: config.yml or config.json
+
+Possible options:
+
+map: path to the map file
+
+tick_duration: delay between simulation ticks (in ms)
+
+entity_count: number of entities of each type
+
+
+
+{
+  "map": "data/island.map",
+  "tick_duration": 50,
+  "entities": {
+    "rabbits": 5,
+    "foxes": 2
+  }
+}
 
 
 ---
 
 Development
 
-Code Style
+Add notes for people who want to work on the project:
 
-TODO: describe any code style guidelines (e.g. Kotlin style guide, C# conventions, naming rules).
+Coding style: e.g. follow a particular style guide.
 
-TODO: mention any linters or formatters (e.g. ktlint, eslint, clang-format).
+Branching model: e.g. main + feature branches.
 
+Useful scripts: list any helper scripts or make targets.
+
+
+Example (adapt to your real setup):
+
+# Rebuild quickly
+make
+
+# Run with debug logging
+./kmintapp --debug
+
+If you have a preferred IDE setup (Visual Studio / CLion / VS Code), mention it here.
+
+
+---
 
 Testing
 
-Explain how to run tests (if any):
+If you have automated tests, document how to run them. For example:
 
-# Example for Gradle
-./gradlew test
-
-# Example for .NET
-dotnet test
-
-# Example for CMake/CTest
+# CTest example
+cd build
 ctest
 
-> TODO: Replace with actual commands and testing framework (JUnit, NUnit, xUnit, etc.).
+# Or, for other setups:
+npm test
+dotnet test
+./gradlew test
 
+Also describe what is covered by the tests:
+
+Unit tests for core logic (pathfinding, rules, etc.).
+
+Integration tests for larger simulation scenarios.
+
+Visual or manual test scenarios (e.g. specific map files).
 
 
 
 ---
 
-Roadmap / Future Improvements
+Known Issues & Limitations
 
-Optional, but nice to have:
+Use this section to be honest about current constraints. Fill in what applies:
 
-TODO: improved AI / pathfinding
+Some edge cases in pathfinding are not yet handled.
 
-TODO: loading different maps from file
+Performance may degrade with very large maps.
 
-TODO: performance improvements / refactoring
+UI is optimized for desktop and may not scale well on very small screens.
 
-TODO: better UI / UX (menus, settings, tooltips)
+No save/load functionality yet.
 
-TODO: export simulation statistics
+
+
+---
+
+Future Improvements
+
+Ideas for extending the app:
+
+Additional entity types with unique behaviours.
+
+More advanced AI (A*, state machines, behavior trees, etc.).
+
+In-game UI controls to pause, step, or adjust speed.
+
+Map editor to create or edit levels.
+
+Export simulation stats (e.g. number of steps, survival times).
 
 
 
@@ -212,51 +350,20 @@ TODO: export simulation statistics
 
 Contributing
 
-If this is mostly a personal/school project, you can keep this simple:
+Contributions, suggestions, or bug reports are welcome.
 
 1. Fork the repository.
 
 
-2. Create a new branch: git checkout -b feature/my-feature.
+2. Create a feature branch:
+
+git checkout -b feature/my-new-feature
 
 
-3. Commit your changes: git commit -m "Add my feature".
+3. Commit your changes with clear messages.
 
 
-4. Push to the branch: git push origin feature/my-feature.
+4. Push the branch and open a pull request.
 
 
-5. Open a Pull Request.
-
-
-
-You can also mention that outside contributions are or aren’t expected.
-
-
----
-
-License
-
-> TODO: Add the actual license you’re using.
-
-
-
-For example:
-
-This project is licensed under the MIT License.
-See the LICENSE file for details.
-
-
----
-
-Acknowledgements
-
-TODO: course or assignment name (if any), e.g. “KMINT – Year X course at [Your University/School]”.
-
-TODO: teacher(s) or classmates who contributed ideas.
-
-TODO: inspiration from other projects, tutorials or libraries.
-
-
-
----
+> This repository is primarily for educational purposes and not actively maintained. Feel free to fork it for your own experiments.
