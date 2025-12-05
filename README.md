@@ -1,358 +1,256 @@
-kmintapp
+# kmintapp
+---
 
-A small educational app built around the KMINT assignment, focusing on simulations, pathfinding and object-oriented design.
+## 📌 Overview
+
+`kmintapp` is a software project developed by **ferrannl**.  
+Use this README as a clear entry point for:
+
+- New developers joining the project
+- Teachers/reviewers assessing the code
+- Yourself, when you come back to this project later
+
+> ℹ️ Replace all placeholder text (like `<your description here>`) with the actual details of your project.
 
 ---
 
-Table of Contents
+## ✨ Features
 
-Overview
+Describe the main features of `kmintapp` here, for example:
 
-Features
-
-Screenshots
-
-Architecture
-
-Getting Started
-
-Prerequisites
-
-Installation
-
-Running the App
-
-
-Configuration
-
-Development
-
-Testing
-
-Known Issues & Limitations
-
-Future Improvements
-
-Contributing
-
-License
-
-
+- 🧠 Core logic or simulations (e.g. game mechanics, pathfinding, agents, etc.)
+- 🎨 User interface (CLI / desktop / mobile / web)
+- 🧩 Modular architecture with clear separation of concerns
+- ✅ Unit and/or integration tests
+- 🔧 Configurable settings (e.g. via config file or UI)
 
 ---
 
-Overview
+## 🏗️ Architecture
 
-kmintapp is an educational project that explores:
+Explain how the project is structured at a high level.
 
-Simulations on a 2D map or grid.
+For example:
 
-Basic AI or pathfinding logic (e.g. moving agents, decision making).
+- `src/` – application source code
+- `src/...` – domain / logic / models / controllers
+- `resources/` – assets, configuration, etc.
+- `tests/` – automated tests
 
-Clean object-oriented design and separation of concerns.
+You can add a short architecture explanation here:
 
+> The application is divided into layers for `<domain>`, `<infrastructure>`, and `<presentation>`, making it easier to maintain and extend.
 
-Use this project as:
+If you have a class diagram or architecture diagram, link it here:
 
-A reference for similar school assignments.
+```text
+docs/
+ ├─ architecture.md
+ └─ class-diagram.png
 
-A playground for experimenting with new algorithms or features.
-
-A base to compare different design or architecture approaches.
-
-
-You can integrate your own description here, for example:
-
-> “This app simulates entities moving on an island map, making decisions based on their surroundings.”
+Example (if you have it):
 
 
 
 
 ---
 
-Features
+🧰 Tech Stack
 
-Adapt/extend this list to match your actual functionality:
+Update this section with the actual technologies used in the project.
 
-Map / World simulation
+Examples:
 
-Load a predefined map or level.
+Language: Java / Kotlin / C# / C++ / TypeScript / …
 
-Step through the simulation tick by tick.
+Build tool: Maven / Gradle / npm / …
 
+Frameworks / Libraries:
 
-Agents / Entities
+GUI: JavaFX / Swing / React / …
 
-Multiple entity types with different behaviours.
-
-Configurable speed, vision, or decision rules.
-
-
-Pathfinding / AI
-
-Simple pathfinding or steering behaviour.
-
-Rule-based or state-based decision making.
+Testing: JUnit / Jest / NUnit / …
 
 
-Visualization / UI
-
-Graphical representation of the world.
-
-Highlighted paths, active entities and states.
-
-
-Configurable parameters
-
-Tweak speeds, delays, map files, or other constants to experiment.
-
+Other: any external services, APIs, or tools
 
 
 
 ---
 
-Screenshots
+🚀 Getting Started
 
-Add screenshots from your repo here (for example, in a docs/ or assets/ folder):
+1. Prerequisites
 
-![kmintapp main screen](docs/screenshot-main.png)
-![Simulation in progress](docs/screenshot-simulation.png)
+List what needs to be installed before running the project, with versions if relevant:
 
-If you don’t have screenshots yet, you can remove this section or keep it as a reminder.
+[ ] <Language> (e.g. Java 17, Node.js 22, etc.)
 
+[ ] <Build tool> (e.g. Maven, Gradle, npm)
 
----
-
-Architecture
-
-Below is a generic high-level structure you can adapt to your actual code:
-
-Core / Domain
-
-Entities and their state (e.g. Rabbit, Fox, Tile, GraphNode).
-
-Simulation rules and time-stepping (World, Game, Simulation).
+[ ] Optional: IDE such as IntelliJ IDEA / VS Code / Rider / …
 
 
-Infrastructure
+Example:
 
-Map loading / parsing (JSON, text, or custom format).
+# Check versions
+java -version
+mvn -v
 
-Asset loading (images, fonts, etc.).
-
-
-Presentation / UI
-
-Rendering of the world and entities.
-
-Handling keyboard / mouse input.
-
-
-Utilities
-
-Math helpers, graph algorithms, pathfinding utilities.
-
-Logging and debug helpers.
-
-
-
-You can document your actual namespaces, packages, or directories here, for example:
-
-src/
-  core/
-  ui/
-  infrastructure/
-  ...
-
-
----
-
-Getting Started
-
-Prerequisites
-
-Adjust this section to your real tech stack. Typical examples:
-
-A modern C++ compiler (e.g. g++ / clang++ with C++17 support)
-
-Or: Java 8+
-
-Or: .NET SDK
-
-Or: Node.js / npm
-
-
-You may also require:
-
-A specific framework or library (e.g. SFML, SDL, JavaFX, Unity, etc.).
-
-CMake or another build system.
-
-
-Installation
-
-Clone the repository:
+2. Clone the Repository
 
 git clone https://github.com/ferrannl/kmintapp.git
 cd kmintapp
 
-If you use a build system, document it here, for example:
+3. Install Dependencies / Build
 
-# Example using CMake – adapt or replace with your actual commands
-mkdir build
-cd build
-cmake ..
-cmake --build .
+Adapt this to your actual setup:
 
-or, for other stacks:
+# Maven example
+mvn clean install
 
-# Java / Gradle example
+# or Gradle example
 ./gradlew build
 
-# .NET example
-dotnet restore
-dotnet build
-
-Running the App
-
-Document the actual executable or command here, for example:
-
-# Example
-./kmintapp
-
-or:
-
-# Java example
-java -jar build/libs/kmintapp.jar
-
-# .NET example
-dotnet run --project src/kmintapp
-
-If your app takes arguments (e.g. map file, seed, speed), describe them here:
-
-./kmintapp --map data/island.map --speed 1.5 --seed 42
+# or Node.js example
+npm install
 
 
 ---
 
-Configuration
+▶️ Running the Application
 
-If your app supports configuration files or command-line flags, explain them here.
+Describe how to run the app:
 
-For example:
+# Example: Maven
+mvn exec:java
 
-Config file: config.yml or config.json
+# Example: Gradle
+./gradlew run
 
-Possible options:
+# Example: Node
+npm start
 
-map: path to the map file
+If the project has different modes (e.g. debug vs release, CLI vs GUI), document them:
 
-tick_duration: delay between simulation ticks (in ms)
+--mode=gui – starts graphical interface
 
-entity_count: number of entities of each type
+--mode=cli – starts command-line interface
 
-
-
-{
-  "map": "data/island.map",
-  "tick_duration": 50,
-  "entities": {
-    "rabbits": 5,
-    "foxes": 2
-  }
-}
+--config=path/to/config.json – use a custom config
 
 
----
+Add any notes about configuration:
 
-Development
+Default configuration file: config.json / application.yml / …
 
-Add notes for people who want to work on the project:
+Environment variables: KMINT_ENV, API_URL, etc.
 
-Coding style: e.g. follow a particular style guide.
-
-Branching model: e.g. main + feature branches.
-
-Useful scripts: list any helper scripts or make targets.
-
-
-Example (adapt to your real setup):
-
-# Rebuild quickly
-make
-
-# Run with debug logging
-./kmintapp --debug
-
-If you have a preferred IDE setup (Visual Studio / CLion / VS Code), mention it here.
 
 
 ---
 
-Testing
+🧪 Testing
 
-If you have automated tests, document how to run them. For example:
+Explain how to run the test suite.
 
-# CTest example
-cd build
-ctest
+# Maven
+mvn test
 
-# Or, for other setups:
-npm test
-dotnet test
+# Gradle
 ./gradlew test
 
-Also describe what is covered by the tests:
+# Node
+npm test
 
-Unit tests for core logic (pathfinding, rules, etc.).
+If you have different test types, describe them:
 
-Integration tests for larger simulation scenarios.
+Unit tests: Test individual classes / functions.
 
-Visual or manual test scenarios (e.g. specific map files).
+Integration tests: Test module interaction and external services.
+
+End-to-end tests: Test the application from the user’s perspective.
+
+
+You can also add coverage information if available.
+
+
+---
+
+📁 Project Structure
+
+Update this with your real structure. Example:
+
+kmintapp/
+ ├─ src/
+ │   ├─ main/
+ │   │   ├─ <your language>/
+ │   │   │   ├─ app/          # Application entry point
+ │   │   │   ├─ domain/       # Core logic, entities, value objects
+ │   │   │   ├─ services/     # Business logic / use cases
+ │   │   │   └─ ui/           # GUI / CLI / API layer
+ │   │   └─ resources/        # Config files, assets, etc.
+ │   └─ test/                 # Tests
+ ├─ docs/                     # Documentation, diagrams
+ ├─ README.md                 # This file
+ └─ <build files>             # pom.xml / build.gradle / package.json etc.
+
+
+---
+
+🧭 Usage Examples
+
+Show how a user or developer interacts with kmintapp.
+
+Command-line examples
+
+# Basic run
+kmintapp
+
+# Run with custom config
+kmintapp --config=examples/demo-config.json
+
+Programmatic usage (if it’s a library)
+
+# Add a short, realistic code snippet here that uses your main API.
+
+
+---
+
+📝 Development Notes
+
+Add any tips for developers working on this repository:
+
+Coding style guidelines (e.g. naming conventions, formatting)
+
+Branching strategy (main, develop, feature branches)
+
+Commit message style (e.g. Conventional Commits)
+
+How to add a new feature:
+
+1. Create a branch.
+
+
+2. Implement feature.
+
+
+3. Add/update tests.
+
+
+4. Open a pull request.
+
+
 
 
 
 ---
 
-Known Issues & Limitations
+🤝 Contributing
 
-Use this section to be honest about current constraints. Fill in what applies:
+If you expect or allow contributions:
 
-Some edge cases in pathfinding are not yet handled.
-
-Performance may degrade with very large maps.
-
-UI is optimized for desktop and may not scale well on very small screens.
-
-No save/load functionality yet.
-
-
-
----
-
-Future Improvements
-
-Ideas for extending the app:
-
-Additional entity types with unique behaviours.
-
-More advanced AI (A*, state machines, behavior trees, etc.).
-
-In-game UI controls to pause, step, or adjust speed.
-
-Map editor to create or edit levels.
-
-Export simulation stats (e.g. number of steps, survival times).
-
-
-
----
-
-Contributing
-
-Contributions, suggestions, or bug reports are welcome.
-
-1. Fork the repository.
+1. Fork the repository
 
 
 2. Create a feature branch:
@@ -360,10 +258,45 @@ Contributions, suggestions, or bug reports are welcome.
 git checkout -b feature/my-new-feature
 
 
-3. Commit your changes with clear messages.
+3. Commit your changes:
+
+git commit -m "Add my new feature"
 
 
-4. Push the branch and open a pull request.
+4. Push the branch:
+
+git push origin feature/my-new-feature
 
 
-> This repository is primarily for educational purposes and not actively maintained. Feel free to fork it for your own experiments.
+5. Open a Pull Request
+
+
+
+
+---
+
+📜 License
+
+Specify the license here.
+
+Examples:
+
+This project is licensed under the MIT License – see the LICENSE file for details.
+
+Internal/educational project – no explicit license.
+
+
+
+---
+
+👤 Author
+
+Ferran (ferrannl on GitHub)
+
+GitHub: @ferrannl
+
+
+Feel free to open an issue if you encounter problems or have suggestions for improvements.
+
+
+---
