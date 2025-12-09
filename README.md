@@ -1,3 +1,8 @@
+Got it — the issue is that some sections in your README were left inside a fenced code block (triple backticks), so the rest of the markdown rendered as plain text instead of headings, lists, etc. I’ll fix the structure by ensuring backticks are only used where they’re supposed to be (for code snippets, directory trees, or commands). Everything else will be normal markdown.
+
+Here’s the corrected README with proper backtick usage:
+
+```markdown
 # kmintapp
 
 `kmintapp` is a C++ application built on top of a reusable simulation framework (`libkmint`).  
@@ -56,117 +61,79 @@ kmintapp/
 ├─ screenshot.png       # Screenshot of the running simulation
 ├─ tutorial.md          # Course / assignment tutorial (how to extend the sim)
 └─ README.md            # This file
+```
 
 Conceptually:
 
-Framework (libkmint/)
+**Framework (`libkmint/`)**
+- Contains generic building blocks for creating simulations.
+- Handles world, actors, timing, drawing, input, etc.
 
-Contains generic building blocks for creating simulations.
-
-Handles world, actors, timing, drawing, input, etc.
-
-
-Application / scenario (sim/)
-
-Contains the concrete behaviour for this assignment.
-
-Uses framework abstractions to define:
-
-World layout and initial state.
-
-Agent types and their behaviour.
-
-Any scenario-specific rules, scoring, or visualisation.
-
-
-
-
+**Application / scenario (`sim/`)**
+- Contains the concrete behaviour for this assignment.
+- Uses framework abstractions to define:
+  - World layout and initial state.
+  - Agent types and their behaviour.
+  - Any scenario-specific rules, scoring, or visualisation.
 
 ---
 
-🧰 Tech Stack
+## 🧰 Tech Stack
 
-Language
+- **Language**: Modern C++ (plus some C for low-level dependencies).
+- **Build system**: CMake
+- **Tooling / environment**:
+  - Optional Nix development shell (`shell.nix`)
+  - Optional direnv integration (`.envrc`)
 
-Modern C++ (plus some C for low-level dependencies).
-
-
-Build system
-
-CMake
-
-
-Tooling / environment
-
-Optional Nix development shell (shell.nix)
-
-Optional direnv integration (.envrc)
-
-
-
-> Exact library versions are managed via dependencies/ and the CMakeLists.txt file.
-
-
-
+> Exact library versions are managed via `dependencies/` and the `CMakeLists.txt` file.
 
 ---
 
-🚀 Getting Started
+## 🚀 Getting Started
 
-1. Prerequisites
+### 1. Prerequisites
 
 You’ll need:
+- A C++ compiler (for example):
+  - GCC or Clang on Linux / macOS
+  - MSVC (Visual Studio) on Windows
+- CMake (3.x+ recommended)
+- (Optional) Nix and direnv if you want to use the provided development shell.
 
-A C++ compiler (for example):
-
-GCC or Clang on Linux / macOS
-
-MSVC (Visual Studio) on Windows
-
-
-CMake (3.x+ recommended)
-
-(Optional) Nix and direnv if you want to use the provided development shell.
-
-
-Optional: Using Nix + direnv
+**Optional: Using Nix + direnv**
 
 If you use Nix:
-
 1. Install nix and direnv.
-
-
 2. Allow direnv in the project folder:
-
-cd /path/to/kmintapp
-direnv allow
-
-
-
-This will automatically load the environment described in shell.nix whenever you enter the directory.
-
+   ```bash
+   cd /path/to/kmintapp
+   direnv allow
+   ```
+   This will automatically load the environment described in `shell.nix` whenever you enter the directory.
 
 ---
 
-2. Clone the Repository
+### 2. Clone the Repository
 
+```bash
 git clone --recurse-submodules https://github.com/ferrannl/kmintapp.git
 cd kmintapp
+```
 
-> The --recurse-submodules flag is important so that dependencies/ and libkmint/ are checked out properly.
-If you already cloned without it, run:
-
-git submodule update --init --recursive
-
-
-
+> The `--recurse-submodules` flag is important so that `dependencies/` and `libkmint/` are checked out properly.  
+> If you already cloned without it, run:
+> ```bash
+> git submodule update --init --recursive
+> ```
 
 ---
 
-3. Configure & Build (CMake)
+### 3. Configure & Build (CMake)
 
 A typical out-of-source build looks like this:
 
+```bash
 # From the repository root
 mkdir -p out/build
 cd out/build
@@ -176,178 +143,135 @@ cmake ../..
 
 # Build (Debug configuration by default)
 cmake --build .
+```
 
-On Windows with Visual Studio installed, you can also open the generated solution from out/build and build from the IDE.
-
+On Windows with Visual Studio installed, you can also open the generated solution from `out/build` and build from the IDE.
 
 ---
 
-4. Running the Application
+### 4. Running the Application
 
-After a successful build, the compiled executable will be placed somewhere inside the out/build tree (for example in out/build/x64-Debug/ depending on your platform and generator).
+After a successful build, the compiled executable will be placed somewhere inside the `out/build` tree (for example in `out/build/x64-Debug/` depending on your platform and generator).
 
 From the build directory:
 
+```bash
 cd out/build
 # Example – adapt to your platform/executable name:
 ./kmintapp           # Linux / macOS
-# or
 .\kmintapp.exe       # Windows
+```
 
 If your generator uses configuration subfolders (e.g. Visual Studio):
 
+```bash
 cd out/build/x64-Debug
 ./kmintapp           # or .\kmintapp.exe on Windows
+```
 
-> If the main executable ends up with a different name (e.g. sim), run that instead.
-
-
-
+> If the main executable ends up with a different name (e.g. `sim`), run that instead.
 
 ---
 
-🧠 How Things Work (High-Level)
+## 🧠 How Things Work (High-Level)
 
-Even without going into every detail of the code, the architecture roughly looks like:
+1. **Framework setup (`libkmint`)**
+   - Defines a world that contains all active entities.
+   - Provides a main game loop that:
+     - Processes input / timing.
+     - Updates all agents.
+     - Draws the current state.
 
-1. Framework setup
+2. **Scenario definition (`sim/`)**
+   - Defines which agents exist in the world.
+   - Specifies how they move and react.
+   - Controls how they are drawn on the screen.
 
-libkmint defines:
-
-A world that contains all active entities.
-
-A main game loop that:
-
-Processes input / timing.
-
-Updates all agents.
-
-Draws the current state.
-
-
-
-
-
-2. Scenario definition
-
-The sim/ directory defines:
-
-Which agents exist in the world.
-
-How they move and react.
-
-How they are drawn on the screen.
-
-
-
-
-3. Main entry point
-
-The app creates the initial world / agents and then hands control over to the framework loop, which keeps running until the user closes the window or the simulation ends.
-
-
-
+3. **Main entry point**
+   - The app creates the initial world / agents and then hands control over to the framework loop, which keeps running until the user closes the window or the simulation ends.
 
 This separation makes it easy to:
-
-Reuse the same framework for different scenarios.
-
-Focus your changes in sim/ when implementing new behaviour.
-
-
+- Reuse the same framework for different scenarios.
+- Focus your changes in `sim/` when implementing new behaviour.
 
 ---
 
-🧪 Testing
+## 🧪 Testing
 
-This repository does not ship with a separate, explicit test suite in a tests/ folder, but the simulation itself is a good behavioural test:
+This repository does not ship with a separate, explicit test suite in a `tests/` folder, but the simulation itself is a good behavioural test:
 
-If it compiles and runs correctly,
-
-and the agents behave as expected in the visualisation,
-
+- If it compiles and runs correctly,
+- and the agents behave as expected in the visualisation,
 
 then the assignment requirements are (usually) met.
 
 If you’d like to extend the project for your own learning, a recommended structure is:
 
+```text
 kmintapp/
 ├─ tests/
 │  ├─ CMakeLists.txt
 │  └─ ...
 └─ ...
+```
 
-and add CTest, GoogleTest or Catch2 to validate specific behaviours.
-
+And add CTest, GoogleTest or Catch2 to validate specific behaviours.
 
 ---
 
-🔧 Development Notes
+## 🔧 Development Notes
 
 Some tips when working with this codebase:
 
-Keep framework code (libkmint/) and scenario code (sim/) separate.
-
-When adding new features:
-
-1. Add or adjust your agents / world setup in sim/.
-
-
-2. Only touch libkmint/ if you need new generic engine features that could be reused.
-
-
-
-If you break something:
-
-Always try a clean rebuild:
-
-rm -rf out/build
-mkdir -p out/build
-cd out/build
-cmake ../..
-cmake --build .
-
-
-
+- Keep framework code (`libkmint/`) and scenario code (`sim/`) separate.
+- When adding new features:
+  1. Add or adjust your agents / world setup in `sim/`.
+  2. Only touch `libkmint/` if you need new generic engine features that could be reused.
+- If you break something:
+  - Always try a clean rebuild:
+    ```bash
+    rm -rf out/build
+    mkdir -p out/build
+    cd out/build
+    cmake ../..
+    cmake --build .
+    ```
 
 ---
 
-🤝 Contributing
+## 🤝 Contributing
 
 This is primarily an educational / personal project, but you can still work with it in a standard GitHub way:
 
 1. Fork the repository.
-
-
 2. Create a feature branch:
-
-git checkout -b feature/my-experiment
-
-
+   ```bash
+   git checkout -b feature/my-experiment
+   ```
 3. Commit your changes:
-
-git commit -m "Describe what you changed"
-
-
+   ```bash
+   git commit -m "Describe what you changed"
+   ```
 4. Push the branch and open a Pull Request on GitHub.
-
-
-
 
 ---
 
-📄 License
+## 📄 License
 
-No explicit license is provided.
+No explicit license is provided.  
 Treat this as an internal / educational project – all rights reserved by the author unless stated otherwise.
 
 If you plan to reuse parts of this repository in a public or commercial project, contact the author first.
 
-
 ---
 
-👤 Author
+## 👤 Author
 
 Ferran – @ferrannl
 
 If you have suggestions, run into build issues, or just want to show what you built on top of this, feel free to open an issue on the repository.
+```
+
+✅ Fixed:  
+- Closed the `text` code block after the directory tree.  
+- Converted conceptual explanations, tech
