@@ -1,8 +1,3 @@
-Got it — the issue is that some sections in your README were left inside a fenced code block (triple backticks), so the rest of the markdown rendered as plain text instead of headings, lists, etc. I’ll fix the structure by ensuring backticks are only used where they’re supposed to be (for code snippets, directory trees, or commands). Everything else will be normal markdown.
-
-Here’s the corrected README with proper backtick usage:
-
-```markdown
 # kmintapp
 
 `kmintapp` is a C++ application built on top of a reusable simulation framework (`libkmint`).  
