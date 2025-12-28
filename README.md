@@ -1,3 +1,5 @@
+![Kmint gameplay](logo.gif)
+
 # kmintapp
 
 `kmintapp` is a C++ application built on top of a reusable simulation framework (`libkmint`).  
